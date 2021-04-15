@@ -20,7 +20,7 @@ while True:
         c.send(b'Content-Type: ' + mimeType.encode() + b'\r\n')
         c.send(b'\r\n')
         data = f.read()
-        c.send(data.encode('euc-kr', 'replace'))
+        c.send(data.encode('euc-kr', 'ignore'))
     elif filename == 'iot.png':
         f = open(filename, 'rb')
         mimeType = 'image/png'
