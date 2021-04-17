@@ -11,6 +11,10 @@ while True:
     msg = data.decode()
     req = msg.split('\r\n')
 
+    # req[0] = GET /index.html HTTP/1.1
+    # req[0].split() = ['GET', '/index.html', 'HTTP/1.1']
+    # req[0].split()[1] = /index.html 
+    # req[0].split()[1].replace('/', '') = index.html
     filename = req[0].split()[1].replace('/', '')
 
     if filename == 'index.html':
