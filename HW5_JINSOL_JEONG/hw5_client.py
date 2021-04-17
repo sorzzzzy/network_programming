@@ -26,6 +26,8 @@ while True:
             if not data:
                 break
             res = data.decode()
+            # 소수점 첫째자리 까지만 표기
+            # {:.2f} = 둘째자리, {:.0} = 정수만
             res = '{:.1f}'.format(float(res))
             print('Result is : ', res)
 
