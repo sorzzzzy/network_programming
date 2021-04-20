@@ -1,3 +1,5 @@
+# 데이터 손실을 고려한 채팅 프로그램
+
 from socket import *
 import random
 import time
@@ -8,6 +10,9 @@ BUFF_SIZE = 1024
 sock = socket(AF_INET, SOCK_DGRAM)
 
 while True: 
+
+    # 메시지 송신 처리 부분!!!!!!!!!!
+
     msg = input('-> ')
     # 재전송 횟수 
     reTx = 0
@@ -28,6 +33,8 @@ while True:
     if reTx > 3:
         print('Timeout')
         sock.sendto(b'Timeout', ('localhost', port))
+
+    # 메시지 수신 처리 부분!!!!!!!!!!
 
     sock.settimeout(None)   # 소켓의 블로킹 모드 timeout 설정 
     while True:     # None인 경우, 무한정 블로킹됨
