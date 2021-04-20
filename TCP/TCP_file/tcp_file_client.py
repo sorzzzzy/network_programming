@@ -39,6 +39,7 @@ s.send(filename.encode())
 
 # 서버로부터 수신할 파일의 크기 수신
 msg = s.recv(BUF_SIZE) 
+
 if not msg:
     s.close()
     sys.exit()
@@ -65,7 +66,6 @@ else:
     print('server:', filesize)
 
 rx_size = 0
-
 # 서버로부터 수신할 파일 열기, 쓰기 전용
 f = open(filename, 'wb') 
 

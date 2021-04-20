@@ -30,8 +30,9 @@ while True:
         conn.close()    # 클라이언트의 연결'만' 끊음, 종료해서는 안 됨
         continue
     else:
-        # 클라이언트로 ‘Filename’ 메시지 전송 
+        # hello를 잘 수신한 경우, hello 출력
         print('client:', addr, msg.decode())
+        # 클라이언트로 ‘Filename’ 메시지 전송 
         conn.send(b'Filename')
 
         # 클라이언트로부터 filename 수신
@@ -46,11 +47,13 @@ while True:
         # 파일 크기 
         filesize = os.path.getsize(filename)
     except: 
+        # 파일이 없는 경우
         conn.send(b'Nofile') 
         conn.close() 
         continue
     else:
         # 클라이언트로 해당 파일의 크기를 전송 
+        # htonl = 2바이트 양의 정수를 호스트 바이트 순서에서 네트워크 바이트 순서로 변환
         fs_net = htonl(filesize) 
         conn.send(str(fs_net).zfill(LENGTH).encode())
     
