@@ -1,8 +1,16 @@
+# 서버-클라이언트 통합 UDP 프로그램
+# 실행 인수에 따라 서버와 클라이언트 기능을 모두 수행할 수 있는 프로그램
+# 프로그램을 실행할 때 ‘c’ 또는 ‘s’ 인수를 지정하면 각각 Client 또는 Server 함수가 실행됨
+#   -> 예) 클라이언트 실행: py udp_total.py c, 서버: py udp_total.py s
+
 import argparse, socket, random 
 from datetime import datetime
 
 BUFF_SIZE = 1024
 
+# 서버 함수
+# 서버는 클라이언트로부터 받은 메시지의 바이트 수를 계산하여 응답 
+# 서버는 일정 비율(prob)에 따라 메시지에 대한 응답을 보내지 않을 수 있음
 def Server(ipaddr, port): # 서버 함수
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
     sock.bind((ipaddr, port))
@@ -16,7 +24,11 @@ def Server(ipaddr, port): # 서버 함수
         text = 'The length is {} bytes.'.format(len(data))
         sock.sendto(text.encode(), addr)
 
-def Client(hostname, port): # 클라이언트 함수
+# 클라이언트 함수
+# 클라이언트는 현재 시각을 count 개수만큼 서버로 전송 
+# 서버의 응답이 없을 경우 재전송
+#   -> 재전송 타임아웃 시간(time)은 0.1로 시작하여 손실 발생 시 2배로 증가(최대 2.0)
+def Client(hostname, port): 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     index=1 #보낸 메시지 번호 
     time = 0.1 # seconds
@@ -24,7 +36,7 @@ def Client(hostname, port): # 클라이언트 함수
         data = str(datetime.now())  # 현재 시간을 문자열로 변환
         sock.sendto(data.encode(), (hostname, port)) 
         print('({}) Waiting for {} sec'.format(index, time)) 
-        sock.settimeout(time)
+        sock.settimeout(time)   # 타임아웃 설정
         try:
             data, addr = sock.recvfrom(BUFF_SIZE)
         except socket.timeout:
@@ -58,6 +70,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     prob = args.prob
     sending_counts = args.count
+    
     if args.role == 'c':
         mode[args.role](args.s, args.p) 
     else:
