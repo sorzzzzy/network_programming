@@ -1,3 +1,5 @@
+# UDP message 송수신 프로그램
+
 from socket import *
 
 port = 3333
