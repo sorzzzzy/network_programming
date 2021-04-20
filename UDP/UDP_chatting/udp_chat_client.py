@@ -8,6 +8,7 @@ port = 3333
 BUF_SIZE = 1024
 
 sock = socket(AF_INET, SOCK_DGRAM)
+# TCP와는 다르게 UDP 프로토콜은 connect()와 같은 연결이 없음
 
 while True:
     msg = input('-> ')

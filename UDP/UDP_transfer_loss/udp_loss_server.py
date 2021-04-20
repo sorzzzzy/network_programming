@@ -17,6 +17,7 @@ while True:
 
     # 일부러 70% 만 ack 전송
     if random.randint(1,10) <= 3:
+        # 30% 내의 확률로 데이터 손실이 발생할 경우
         print('Packet from {} lost!'.format(addr))
         continue
     print('Packet is {} from {}'.format(data.decode(), addr))

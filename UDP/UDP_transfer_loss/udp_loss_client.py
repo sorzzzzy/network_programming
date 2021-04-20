@@ -11,12 +11,15 @@ BUFSIZE = 1024
 
 sock = socket(AF_INET, SOCK_DGRAM)
 
-for i in range(10):
-    time = 0.1
+for i in range(10):     # 10번 전송
+    time = 0.1      # 0.1초
     data = 'Hello IoT'
     while True:
         sock.sendto(data.encode(), ('localhost', port))
+        # i = 전송 횟수
         print('Packet({}): Waiting up to {} secs for ack'.format(i, time)) 
+        
+        # settimeout 함수로 timeout 설정
         sock.settimeout(time)
 
         try:
@@ -27,6 +30,7 @@ for i in range(10):
             if time > 2.0:
                 break
         else:
+            # ack을 수신함
             print('Response', data.decode())
             # break를 만나면 for문으로 돌아가 time을 초기화
             break
