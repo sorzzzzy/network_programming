@@ -1,3 +1,5 @@
+# 2개의 스레드를 가지고 전역변수 'x' 증가시키기
+
 import threading
 
 x = 0 # global variable shared by threads
