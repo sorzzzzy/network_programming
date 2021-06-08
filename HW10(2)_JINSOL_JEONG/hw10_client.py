@@ -15,6 +15,7 @@ def handler(sock):
 
 addr = ('localhost', 2500)
 sock = socket(AF_INET, SOCK_STREAM)
+# TCP이므로 connect() 필요
 sock.connect(addr)
 
 # ID 입력받기

@@ -14,7 +14,7 @@ def handler(sock):
 addr = ('localhost', 5555)
 sock = socket(AF_INET, SOCK_STREAM)
 sock.connect(addr)
-
+ 
 # ID 입력받기
 my_id = input('ID를 입력하세요: ') 
 sock.send(('['+my_id+']').encode())

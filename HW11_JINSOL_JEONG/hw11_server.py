@@ -9,6 +9,7 @@ import time
 
 socks = []
 
+# 서버 소켓 생성
 s_sock = socket.socket()
 s_sock.bind(('', 5555))
 s_sock.listen(5)
@@ -24,8 +25,10 @@ while True:
     # 수신(읽기 가능한) 소켓 리스트 검사
     for s in r_sock:
         # 새로운 클라이언트의 연결 요청 이벤트 발생
+        # 서버소켓이라면, 새로운 클라이언트 요청이 있다는 뜻
         if s == s_sock:
             conn, addr = s_sock.accept()
+            # 소켓 리스트에 새로운 클라이언트 추가
             socks.append(conn)
             print(f'Client ({addr} connected.')
         # 기존 클라이언트의 데이터 수신 이벤트 발생
