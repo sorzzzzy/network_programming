@@ -7,13 +7,13 @@ port = int(input("Port Num : "))
 address =('localhost', port)
 BUF_SIZE = 1024
 
-s = sock(AF_INET, SOCK_STREAM)
+s = socket(AF_INET, SOCK_STREAM)
 s.connect(address)
 
 while True:
     msg = input("Message to send : ")
     s.send(msg.encode())
     data = s.recv(BUF_SIZE)
-    print("Received message: %s", %data.decode())
+    print("Received message: %s", data.decode())
 
-s.close()
+    s.close()
