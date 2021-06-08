@@ -28,7 +28,7 @@ def mosaic(filename, detection_result): # 모자이크 처리 함수
     return image
 
 if __name__ == "__main__":
-    IMAGE = 'myphoto.jpeg'   # 얼굴 검출할 이미지 파일
+    IMAGE = 'myphoto.JPG'   # 얼굴 검출할 이미지 파일
     detection_result = detect_face(IMAGE)   # 얼굴 검출할 이미지 파일, 얼굴 위치를 꺼내옴
     image = mosaic(IMAGE, detection_result) # 검출한 얼굴을 모자이크 처리 
     image.show()    # 모자이크한 이미지 화면 출력
