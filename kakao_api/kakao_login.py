@@ -77,6 +77,7 @@ class http_handler(BaseHTTPRequestHandler):
         template_object = {
                             "object_type": "text",
                             "text": "카카오 API 정말 쉽구나!",
+                            # 콘텐츠 클릭 시 이동할 링크 정보
                             "link":
                                     {
                                         "web_url": "https://labs.sch.ac.kr/department/iot/m/",
