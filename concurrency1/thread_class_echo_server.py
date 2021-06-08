@@ -15,6 +15,7 @@ class ClientThread(threading.Thread):
         # 소켓 초기화
         self.sock = sock
     
+    # 실제 스레드가 시작하면 돌아갈 코드
     def run(self):
         while True:
             data = self.sock.recv(BUFSIZE) 
@@ -32,5 +33,6 @@ sock.listen(5)
 while True:
     conn, (remotehost, remoteport) = sock.accept() 
     print('connected by', remotehost, remoteport) 
+    # 스레드 만들 때 소켓을 인자로 꼭 넘겨주어야 함
     th = ClientThread(conn)
     th.start()

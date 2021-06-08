@@ -9,11 +9,14 @@ port = 3333
 BUFFSIZE = 1024
 
 # 메시지를 수신해서 화면에 출력하는 부분을 스레드로 만듦
+# 보내는 부분을 스레드로 만들어도 상관은 없음
 def recvTask(sock):
     while True:
+        # 받아서 메시지를 계속 출력
         data = sock.recv(BUFFSIZE)
         print('<-', data.decode())
 
+# 소켓 만들고 연결
 sock = socket(AF_INET, SOCK_STREAM) 
 sock.connect(('localhost', port))
 

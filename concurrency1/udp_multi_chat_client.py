@@ -20,6 +20,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 my_id = input('ID를 입력하세요: ') 
 sock.sendto(('['+my_id+']').encode(), svr_addr)
 
+# 메인 스레드 만들기
 th = threading.Thread(target=handler, args=(sock,)) 
 # 메인 스레드 종료 시, 서브 스레드도 함께 종료시키기 위함
 th.daemon = True

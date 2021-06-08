@@ -10,9 +10,9 @@ BUFSIZE = 1024
 
 # 하나의 별도의 함수로 만듬
 # 클라이언트와 통신할 스레드를 만들기 때문에 소켓을 인자로 받음
-
 def echoTask(sock): 
     while True:
+        # 데이터 수신
         data = sock.recv(BUFSIZE)
         if not data:
             break
@@ -27,9 +27,10 @@ sock.bind(('', port))
 sock.listen(5)
 
 while True:
+    # 소켓을 받음 (=conn)
     conn, (remotehost, remoteport) = sock.accept() 
     print('connected by', remotehost, remoteport)
     
-    # 인자로 소켓을 넘겨줌
+    # 스레드 객체를 만들고, 그 인자로 소켓(=conn)을 넘겨줌
     th = threading.Thread(target=echoTask, args=(conn,)) 
     th.start()

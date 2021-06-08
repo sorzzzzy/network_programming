@@ -1,3 +1,6 @@
+# 공유 자원을 사용하는 프로그램 : 개선된 서버
+# Lock 사용
+
 from socket import *
 import threading
 
@@ -9,7 +12,7 @@ sharedData = 0
 def thread_handler(sock):
     global sharedData, lock 
 
-    # 임계영역 보호
+    # 임계영역 보호 (=전역변수를 건드리는 부분)
     lock.acquire() 
     for _ in range(10000000):
             sharedData += 1

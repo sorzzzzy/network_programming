@@ -17,16 +17,17 @@ def sendTask(sock):
         # 입력받은 메시지를 클라이언트로 보냄
         sock.send(resp.encode())
 
-# 메인 스레드 : 메시지를 수신해서 화면에 출력하는 역할
 s = socket(AF_INET, SOCK_STREAM)
 s.bind(('', port))
 s.listen(1)
+# 메인 스레드를 위한 소켓 생성
 conn, addr = s.accept()
 
-# 스레드 생성 : 메시지를 입력받아서 보내는 역할
+# 메시지 전송 스레드 생성 : 메시지를 입력받아서 보내는 역할
 th = threading.Thread(target=sendTask, args=(conn,)) 
 th.start()
 
+# 메인 스레드는 받아서 화면에 출력하는 역할만 수행함
 while True:
     data = conn.recv(BUFFSIZE) 
     print('<-', data.decode())

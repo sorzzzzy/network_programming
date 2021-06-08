@@ -11,18 +11,20 @@ def increment():
 
 def thread_task(lock):
     for _ in range(300000):
-    
-    # 임계구역
-    lock.acquire() # Acquire lock before accessing the shared data 
-    increment()
-    lock.release() # Release lock after finishing the access
+        # 임계구역=전역변수에 접근하는 부분 (=increment함수)
+        lock.acquire() # Acquire lock before accessing the shared data 
+        increment()
+        # lock을 다 쓴 후 풀어줌
+        lock.release() # Release lock after finishing the access
 
 def main_task():
     global x
     x=0     # initialize x as 0
 
+    # LOCK 클래스 사용
     lock = threading.Lock() # create a lock object
 
+    # 인자로 lock을 넘겨줌
     t1 = threading.Thread(target=thread_task, args=(lock,)) 
     t2 = threading.Thread(target=thread_task, args=(lock,))
     
